@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS funcionarios (
 
 
 -- Adicionar alguns funcionários
-INSERT INTO funcionarios (nome, cargo)
+INSERT INTO funcionarios (id_funcionario, nome, cargo)
 VALUES
 ('João Silva', 'Entregador'),
 ('Maria Souza', 'Atendente'),
@@ -267,3 +267,50 @@ FROM
     pedido
 JOIN 
     entregas ON pedido.id_entregas = entregas.id_entregas;
+
+
+    --exerc 8
+    CREATE TABLE IF NOT EXISTS supervisor (
+    id_supervisor SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    cargo VARCHAR(255) NOT NULL
+);
+
+
+INSERT INTO supervisor (id_supervisor, nome, cargo)
+VALUES
+(1,'Supervisor 1', 'Gerente'),
+(2,'Supervisor 2', 'Coordenador'),
+(3,'Supervisor 3', 'Líder de Equipe'),
+(4,'Supervisor 4', 'Supervisor de Vendas'),
+(5,'Supervisor 5', 'Supervisor de Produção'),
+(6,'Supervisor 6', 'Supervisor de Logística'),
+(7,'Supervisor 7', 'Supervisor de Qualidade'),
+(8,'Supervisor 8', 'Supervisor de RH'),
+(9,'Supervisor 9', 'Supervisor Financeiro'),
+(10,'Supervisor 10', 'Supervisor de TI');
+
+
+SELECT 
+    f.nome AS nome_funcionario,
+    f.cargo AS cargo_funcionario,
+    s.nome AS nome_supervisor,
+    s.cargo AS cargo_supervisor
+FROM 
+    funcionarios AS f
+LEFT JOIN 
+    funcionarios AS s ON f.id_supervisor = s.id_funcionario;
+
+
+--exerci 9 
+
+SELECT 
+    pedido.id_pedido,
+    pizzas.nome AS nome_pizza,
+    tamanhos_pizza.tamanho AS tamanho_pizza
+FROM 
+    pedido
+JOIN 
+    pizzas ON pedido.id_pizza = pizzas.id_pizza
+LEFT JOIN 
+    tamanhos_pizza ON pedido.id_tamanho_pizza = tamanhos_pizza.id_tamanho_pizza;
