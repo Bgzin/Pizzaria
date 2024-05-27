@@ -198,6 +198,8 @@ CREATE TABLE IF NOT EXISTS funcionarios (
     cargo VARCHAR(255) NOT NULL
 );
 
+DROP TABLE funcionarios;
+
 
 -- Adicionar alguns funcionários
 INSERT INTO funcionarios (id_funcionario, nome, cargo)
@@ -276,6 +278,7 @@ JOIN
     cargo VARCHAR(255) NOT NULL
 );
 
+SELECT * FROM supervisor;
 
 INSERT INTO supervisor (id_supervisor, nome, cargo)
 VALUES
@@ -292,14 +295,15 @@ VALUES
 
 
 SELECT 
-    f.nome AS nome_funcionario,
-    f.cargo AS cargo_funcionario,
-    s.nome AS nome_supervisor,
-    s.cargo AS cargo_supervisor
+    f.nome AS nome_funcionario, -- Seleciona o nome do funcionário e renomeia como "nome_funcionario"
+    f.cargo AS cargo_funcionario, -- Seleciona o cargo do funcionário e renomeia como "cargo_funcionario"
+    s.nome AS nome_supervisor, -- Seleciona o nome do supervisor e renomeia como "nome_supervisor"
+    s.cargo AS cargo_supervisor -- Seleciona o cargo do supervisor e renomeia como "cargo_supervisor"
 FROM 
-    funcionarios AS f
+    funcionarios AS f -- Especifica a tabela "funcionarios" e a renomeia como "f" (para funcionários)
 LEFT JOIN 
-    funcionarios AS s ON f.id_supervisor = s.id_funcionario;
+    supervisor AS s ON f.id_supervisor = s.id_supervisor; -- Realiza um join à esquerda com a tabela "supervisor" renomeada como "s", onde o ID do supervisor do funcionário corresponde ao ID do supervisor
+
 
 
 --exerci 9 
@@ -314,3 +318,6 @@ JOIN
     pizzas ON pedido.id_pizza = pizzas.id_pizza
 LEFT JOIN 
     tamanhos_pizza ON pedido.id_tamanho_pizza = tamanhos_pizza.id_tamanho_pizza;
+
+
+--exerci 10 
